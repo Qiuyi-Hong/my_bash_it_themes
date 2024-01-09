@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
-# This is the modified version of the Atom theme for Bash-it
+# Created by Qiuyi Hong
 
-# Atomic Bash Prompt for Bash-it
-# By lfelipe base on the theme brainy of MunifTanjim 
+# This is the modified version of the Atomic theme based on Bash-it framework for Python developers 
+
+# PyBash is inspired by the Atomic theme by lfelipe
+
 
 ############
 ## Colors ##
