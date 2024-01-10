@@ -14,8 +14,7 @@ IRed="\e[1;49;31m"
 IGreen="\e[1;49;32m"
 IYellow="\e[1;49;33m"
 IWhite="\e[1;49;37m"
-BIWhite="\e[1;49;37m"
-BICyan="\e[1;49;36m"
+ICyan="\e[1;49;36m"
 IBlue="\e[1;49;34m" 
 IPurple="\e[1;49;35m"
 
@@ -124,8 +123,8 @@ ____pybash_bottom() {
 
 ___pybash_prompt_user_info() {
   color=$white
-  box="${normal}${LineA}\$([[ \$? != 0 ]] && echo \"${IRed}[${IRed}${SX}${IRed}]${normal}${Line}\")${BICyan}[|${BICyan}]${normal}${Line}"
-  info="${IYellow}\u${BICyan}@${IGreen}\h" # the @ is changed from IRed to BICyan
+  box="${normal}${LineA}\$([[ \$? != 0 ]] && echo \"${IRed}[${IRed}${SX}${IRed}]${normal}${Line}\")${ICyan}[|${ICyan}]${normal}${Line}"
+  info="${IYellow}\u${ICyan}@${IGreen}\h" # the @ is changed from IRed to ICyan
   
   printf "%s|%s|%s|%s" "${color}" "${info}" "${white}" "${box}"
 }
@@ -159,7 +158,7 @@ ___pybash_prompt_scm() {
 
 ___pybash_prompt_python() {
   [ "${THEME_SHOW_PYTHON}" != "true" ] && return
-  color=$BICyan
+  color=$ICyan
   box="[|]"
 
   # Get the combined output of python_version_prompt
@@ -172,24 +171,24 @@ ___pybash_prompt_python() {
   # Combine them with a space
   info="${py_env} ${py_ver}"
 
-  printf "%s|%s|%s|%s" "${color}" "${info}" "${BICyan}" "${box}" 
+  printf "%s|%s|%s|%s" "${color}" "${info}" "${ICyan}" "${box}" 
 }
 
 ___pybash_prompt_ruby() {
   [ "${THEME_SHOW_RUBY}" != "true" ] && return
-  color=$bold_white
+  color=$IWhite
   box="[|]"
   info="rb-$(ruby_version_prompt)"
-  printf "%s|%s|%s|%s" "${color}" "${info}" "${bold_red}" "${box}"
+  printf "%s|%s|%s|%s" "${color}" "${info}" "${IRed}" "${box}"
 }
 
 ___pybash_prompt_todo() {
   [ "${THEME_SHOW_TODO}" != "true" ] ||
   [ -z "$(which todo.sh)" ] && return
-  color=$bold_white
+  color=$IWhite
   box="[|]"
   info="t:$(todo.sh ls | egrep "TODO: [0-9]+ of ([0-9]+)" | awk '{ print $4 }' )"
-  printf "%s|%s|%s|%s" "${color}" "${info}" "${bold_green}" "${box}"
+  printf "%s|%s|%s|%s" "${color}" "${info}" "${IGreen}" "${box}"
 }
 
 ___pybash_prompt_clock() {
@@ -197,7 +196,7 @@ ___pybash_prompt_clock() {
   color=$THEME_CLOCK_COLOR
   box="[|]"
   info="$(date +"${THEME_CLOCK_FORMAT}")"
-  printf "%s|%s|%s|%s" "${color}" "${info}" "${IYellow}" "${box}" # change to IYellow from bold_white
+  printf "%s|%s|%s|%s" "${color}" "${info}" "${IYellow}" "${box}" # change to IYellow from IWhite
 }
 
 ___pybash_prompt_battery() {
@@ -207,9 +206,9 @@ ___pybash_prompt_battery() {
 
   batp=$(battery_percentage)
   if [ "$batp" -eq 50 ] || [ "$batp" -gt 50 ]; then
-    color=$bold_green
+    color=$IGreen
     elif [ "$batp" -lt 50 ] && [ "$batp" -gt 25 ]; then
-    color=$bold_yellow
+    color=$IYellow
     elif [ "$batp" -eq 25 ] || [ "$batp" -lt 25 ]; then
     color=$IRed
   fi
@@ -218,12 +217,12 @@ ___pybash_prompt_battery() {
   ac_adapter_disconnected && info="-"
   info+=$batp
   [ "$batp" -eq 100 ] || [ "$batp" -gt 100 ] && info="AC"
-  printf "%s|%s|%s|%s" "${color}" "${info}" "${bold_white}" "${box}"
+  printf "%s|%s|%s|%s" "${color}" "${info}" "${IWhite}" "${box}"
 }
 
 ___pybash_prompt_exitcode() {
   [ "${THEME_SHOW_EXITCODE}" != "true" ] && return
-  color=$bold_purple
+  color=$IPurple
   [ "$exitcode" -ne 0 ] && printf "%s|%s" "${color}" "${exitcode}"
 }
 
@@ -343,7 +342,7 @@ __pybash_ps1() {
 }
 
 __pybash_ps2() {
-  color=$bold_white
+  color=$IWhite
   printf "%s%s%s" "${color}" "${__PYBASH_PROMPT_CHAR_PS2}  " "${normal}"
 }
 
